@@ -4,10 +4,17 @@ Tool Name:
   c:\program files (x86)\microchip\xc16\v1.41\bin\bin\..\bin/elf-ld.exe
 
 Command:
+  -TC:\\Users\\MTurner\\AppData\\Local\\Temp\\tmp00003608.00 \
+  -TC:\\Users\\MTurner\\AppData\\Local\\Temp\\tmp00003608.01 \
+  -TC:\\Users\\MTurner\\AppData\\Local\\Temp\\tmp00003608.02 \
+  -TC:\\Users\\MTurner\\AppData\\Local\\Temp\\tmp00003608.03 \
+  -TC:\\Users\\MTurner\\AppData\\Local\\Temp\\tmp00003608.04 \
+  -TC:\\Users\\MTurner\\AppData\\Local\\Temp\\tmp00003608.05 \
+  -TC:\\Users\\MTurner\\AppData\\Local\\Temp\\tmp00003608.06 \
   -p24FJ128GC010 \
   --mdfp=C:/Programming/Microchip/MPLABX/v5.30/packs/Microchip/PIC24F-GC_DFP/1.1.16/xc16 \
   -o \
-  dist/default/production/Stamp.X.production.elf \
+  dist/default/debug/Stamp.X.debug.elf \
   -Lc:/program files (x86)/microchip/xc16/v1.41/bin/bin/.. \
   -LC:/Programming/Microchip/MPLABX/v5.30/packs/Microchip/PIC24F-GC_DFP/1.1.16/xc16/bin/../support/PIC24F/gld \
   -Lc:/program files (x86)/microchip/xc16/v1.41/bin/bin/../../lib \
@@ -18,10 +25,13 @@ Command:
   -Lc:/program files (x86)/microchip/xc16/v1.41/bin/bin/../../support/dsPIC33C/gld \
   -Lc:/program files (x86)/microchip/xc16/v1.41/bin/bin/../../support/dsPIC33E/gld \
   -Lc:/program files (x86)/microchip/xc16/v1.41/bin/bin/../../support/dsPIC33F/gld \
-  build/default/production/Main.o \
+  build/default/debug/Main.o \
   --local-stack \
   --defsym=__MPLAB_BUILD=1 \
-  -Tp24FJ128GC010.gld.00 \
+  --defsym=__MPLAB_DEBUG=1 \
+  --defsym=__DEBUG=1 \
+  --defsym=__MPLAB_DEBUGGER_PK3=1 \
+  -Tp24FJ128GC010.gld.07 \
   --stack=16 \
   --check-sections \
   --data-init \
@@ -33,10 +43,10 @@ Command:
   --stackguard=16 \
   --no-force-link \
   --smart-io \
-  -Map=dist/default/production/Stamp.X.production.map \
+  -Map=dist/default/debug/Stamp.X.debug.map \
   --report-mem \
   --memorysummary \
-  dist/default/production/memoryfile.xml \
+  dist/default/debug/memoryfile.xml \
   -start-group \
   --library=lega-pic30-elf \
   --library=m-elf \
@@ -66,17 +76,24 @@ Default Scalar Model: Small
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x10a           0x18f  (399)
-.text                        0x30a                0x84            0xc6  (198)
+.text                        0x30a                0x8a            0xcf  (207)
 
-                 Total "program" memory used (bytes):          0x255  (597) <1%
+                 Total "program" memory used (bytes):          0x25e  (606) <1%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x2000]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
+reserve_data_0x800           0x800                0x1c            0x1c  (28)
+reserve_data_0x81c           0x81c                 0x2             0x2  (2)
+reserve_data_0x81e           0x81e                 0x2             0x2  (2)
+reserve_data_0x820           0x820                 0x2             0x2  (2)
+reserve_data_0x822           0x822                 0x2             0x2  (2)
+reserve_data_0x824           0x824                 0x4             0x4  (4)
+reserve_data_0x82a           0x82a                0x26            0x26  (38)
 
-                 Total "data" memory used (bytes):              0  (0) 
+                 Total "data" memory used (bytes):           0x4e  (78) <1%
 
 
 Dynamic Memory Usage
@@ -84,9 +101,9 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0x800                              0x2000  (8192)
+stack                        0x850                              0x1fb0  (8112)
 
-                 Maximum dynamic memory (bytes):         0x2000  (8192)
+                 Maximum dynamic memory (bytes):         0x1fb0  (8112)
 
 Note: Project is using a large data memory model when small data memory model is sufficient.
 
@@ -99,7 +116,7 @@ External Symbols in Program Memory (by address):
                   0x000252                  __data_init_da
                   0x000304                  __DefaultInterrupt
                   0x00030a                  _main
-                  0x00037a                  _initI2C
+                  0x000380                  _initI2C
 
 External Symbols in Program Memory (by name):
 
@@ -108,7 +125,7 @@ External Symbols in Program Memory (by name):
                   0x000252                  __data_init_da
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
-                  0x00037a                  _initI2C
+                  0x000380                  _initI2C
                   0x00030a                  _main
 
 Memory Configuration
@@ -128,8 +145,46 @@ CONFIG1          0x0157fe           0x000002
 
 Linker script and memory map
 
-LOAD build/default/production/Main.o
+
+reserve_data_0x800
+                    0x0800         0x1c
+                    0x081c                  . = 0x1c
+ *fill*             0x0800         0x1c00
+
+reserve_data_0x81c
+                    0x081c          0x2
+                    0x081e                  . = 0x2
+ *fill*             0x081c          0x200
+
+reserve_data_0x81e
+                    0x081e          0x2
+                    0x0820                  . = 0x2
+ *fill*             0x081e          0x200
+
+reserve_data_0x820
+                    0x0820          0x2
+                    0x0822                  . = 0x2
+ *fill*             0x0820          0x200
+
+reserve_data_0x822
+                    0x0822          0x2
+                    0x0824                  . = 0x2
+ *fill*             0x0822          0x200
+
+reserve_data_0x824
+                    0x0824          0x4
+                    0x0828                  . = 0x4
+ *fill*             0x0824          0x400
+
+reserve_data_0x82a
+                    0x082a         0x26
+                    0x0850                  . = 0x26
+ *fill*             0x082a         0x2600
+LOAD build/default/debug/Main.o
                     0x0001                  __MPLAB_BUILD = 0x1
+                    0x0001                  __MPLAB_DEBUG = 0x1
+                    0x0001                  __DEBUG = 0x1
+                    0x0001                  __MPLAB_DEBUGGER_PK3 = 0x1
 LOAD pPIC24Fxxx
 LOAD c:/program files (x86)/microchip/xc16/v1.41/bin/bin/../../lib\libfx-elf.a
                     0x157f8                  __CONFIG4 = 0x157f8
@@ -192,24 +247,24 @@ __CONFIG1
 
 .debug_info       0x000000        0xb74
  *(.debug_info)
- .debug_info      0x000000        0xb74 build/default/production/Main.o
+ .debug_info      0x000000        0xb74 build/default/debug/Main.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev     0x000000         0xed
  *(.debug_abbrev)
- .debug_abbrev    0x000000         0xed build/default/production/Main.o
+ .debug_abbrev    0x000000         0xed build/default/debug/Main.o
 
-.debug_line       0x000000        0x124
+.debug_line       0x000000        0x125
  *(.debug_line)
- .debug_line      0x000000        0x124 build/default/production/Main.o
+ .debug_line      0x000000        0x125 build/default/debug/Main.o
 
 .debug_frame      0x000000         0x4c
  *(.debug_frame)
- .debug_frame     0x000000         0x4c build/default/production/Main.o
+ .debug_frame     0x000000         0x4c build/default/debug/Main.o
 
 .debug_str        0x000000         0x3f
  *(.debug_str)
- .debug_str       0x000000         0x3f build/default/production/Main.o
+ .debug_str       0x000000         0x3f build/default/debug/Main.o
 
 .debug_loc
  *(.debug_loc)
@@ -221,7 +276,7 @@ __CONFIG1
                   0x000000         0x27
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000         0x27 build/default/production/Main.o
+                  0x000000         0x27 build/default/debug/Main.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -229,7 +284,7 @@ __CONFIG1
 .debug_aranges    0x000000         0x18
  *(.debug_aranges)
  .debug_aranges
-                  0x000000         0x18 build/default/production/Main.o
+                  0x000000         0x18 build/default/debug/Main.o
                     0x0000                  WREG0 = 0x0
                     0x0000                  _WREG0 = 0x0
                     0x0002                  WREG1 = 0x2
@@ -1960,18 +2015,18 @@ LOAD c:/program files (x86)/microchip/xc16/v1.41/bin/bin/../../lib\liblega-pic30
 LOAD c:/program files (x86)/microchip/xc16/v1.41/bin/bin/../../lib\libm-elf.a
 LOAD c:/program files (x86)/microchip/xc16/v1.41/bin/bin/../../lib\liblega-c-elf.a
 END GROUP
-OUTPUT(dist/default/production/Stamp.X.production.elf elf32-pic30)
+OUTPUT(dist/default/debug/Stamp.X.debug.elf elf32-pic30)
 LOAD default_isr
 
 .debug_pubtypes
                   0x000018         0xdf
  .debug_pubtypes
-                  0x000018         0xdf build/default/production/Main.o
+                  0x000018         0xdf build/default/debug/Main.o
 
 __c30_signature
                   0x0000f7         0x12
  __c30_signature
-                  0x0000f7          0x6 build/default/production/Main.o
+                  0x0000f7          0x6 build/default/debug/Main.o
  __c30_signature
                   0x0000fd          0x6 c:/program files (x86)/microchip/xc16/v1.41/bin/bin/../../lib\liblega-pic30-elf.a(crt0_extended24.o)
  __c30_signature
@@ -1979,17 +2034,17 @@ __c30_signature
 
 .config_JTAGEN    0x0157fe          0x2
  .config_JTAGEN
-                  0x0157fe          0x2 build/default/production/Main.o
+                  0x0157fe          0x2 build/default/debug/Main.o
 
 .config_IESO      0x0157fc          0x2
- .config_IESO     0x0157fc          0x2 build/default/production/Main.o
+ .config_IESO     0x0157fc          0x2 build/default/debug/Main.o
 
 .config_IOL1WAY
                   0x0157f8          0x2
  .config_IOL1WAY
-                  0x0157f8          0x2 build/default/production/Main.o
+                  0x0157f8          0x2 build/default/debug/Main.o
 
-.text             0x00030a         0x84
- .text            0x00030a         0x84 build/default/production/Main.o
+.text             0x00030a         0x8a
+ .text            0x00030a         0x8a build/default/debug/Main.o
                   0x00030a                  _main
-                  0x00037a                  _initI2C
+                  0x000380                  _initI2C

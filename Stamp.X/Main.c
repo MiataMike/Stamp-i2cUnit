@@ -13,7 +13,7 @@
 
 
 // here are some defines that make writing messages on i2c easier
-// use them like sendbuffer = (s_address & read)
+// use them like sendbuffer = (s_address | read)
 //address byte
 #define s_address 0b01011110
 #define write 0
@@ -35,7 +35,9 @@ int main(void)
 { 
     initI2C();
     PR1 = 16374; // Timer 1 terminal value
-    T1CON = 0x8030; // Timer 1 on - pre-scale divide by 256
+    //T1CON = 0x8030; // Timer 1 on - pre-scale divide by 256
+    T1CONbits.TCKPS = 0b10; //prescale to 64
+    T1CONbits.TON = 1; //timer on
    
     char i=0;
     while (1)
@@ -43,13 +45,13 @@ int main(void)
         if (IFS0bits.T1IF) // Test the terminal count interrupt
         {
             IFS0bits.T1IF = 0; // Clear the interrupt flag bit
-
+            I2C2STATbits.ACKSTAT = 0;
             I2C2CONbits.SEN = 1; // send a start bit
             while (I2C2CONbits.SEN); // wait until the start bit is complete.
-            I2C2TRN = (s_address & write); // load the transmit register with 
+            I2C2TRN = (s_address | read); // load the transmit register with 
                                            //address write.
             while (I2C2STATbits.TRSTAT); // wait for transmit complete
-            I2C2TRN = (channel1); //command byte, select channel 1
+            I2C2TRN = (channel2); //command byte, select channel 1
             while (I2C2STATbits.TRSTAT); // wait for transmit complete
             I2C2TRN = (i);
             I2C2CONbits.PEN = 1;    // send stop bit
