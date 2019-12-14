@@ -4,14 +4,14 @@ Tool Name:
   c:\program files (x86)\microchip\xc16\v1.41\bin\bin\..\bin/elf-ld.exe
 
 Command:
-  -TC:\\Users\\MTurner\\AppData\\Local\\Temp\\tmp00003608.00 \
-  -TC:\\Users\\MTurner\\AppData\\Local\\Temp\\tmp00003608.01 \
-  -TC:\\Users\\MTurner\\AppData\\Local\\Temp\\tmp00003608.02 \
-  -TC:\\Users\\MTurner\\AppData\\Local\\Temp\\tmp00003608.03 \
-  -TC:\\Users\\MTurner\\AppData\\Local\\Temp\\tmp00003608.04 \
-  -TC:\\Users\\MTurner\\AppData\\Local\\Temp\\tmp00003608.05 \
-  -TC:\\Users\\MTurner\\AppData\\Local\\Temp\\tmp00003608.06 \
-  -p24FJ128GC010 \
+  -TC:\\Users\\MTurner\\AppData\\Local\\Temp\\tmp00000fd0.00 \
+  -TC:\\Users\\MTurner\\AppData\\Local\\Temp\\tmp00000fd0.01 \
+  -TC:\\Users\\MTurner\\AppData\\Local\\Temp\\tmp00000fd0.02 \
+  -TC:\\Users\\MTurner\\AppData\\Local\\Temp\\tmp00000fd0.03 \
+  -TC:\\Users\\MTurner\\AppData\\Local\\Temp\\tmp00000fd0.04 \
+  -TC:\\Users\\MTurner\\AppData\\Local\\Temp\\tmp00000fd0.05 \
+  -TC:\\Users\\MTurner\\AppData\\Local\\Temp\\tmp00000fd0.06 \
+  -p24FJ128GC006 \
   --mdfp=C:/Programming/Microchip/MPLABX/v5.30/packs/Microchip/PIC24F-GC_DFP/1.1.16/xc16 \
   -o \
   dist/default/debug/Stamp.X.debug.elf \
@@ -25,13 +25,13 @@ Command:
   -Lc:/program files (x86)/microchip/xc16/v1.41/bin/bin/../../support/dsPIC33C/gld \
   -Lc:/program files (x86)/microchip/xc16/v1.41/bin/bin/../../support/dsPIC33E/gld \
   -Lc:/program files (x86)/microchip/xc16/v1.41/bin/bin/../../support/dsPIC33F/gld \
-  build/default/debug/Main.o \
+  build/default/debug/newmainXC16.o \
   --local-stack \
   --defsym=__MPLAB_BUILD=1 \
   --defsym=__MPLAB_DEBUG=1 \
   --defsym=__DEBUG=1 \
   --defsym=__MPLAB_DEBUGGER_PK3=1 \
-  -Tp24FJ128GC010.gld.07 \
+  -Tp24FJ128GC006.gld.07 \
   --stack=16 \
   --check-sections \
   --data-init \
@@ -76,9 +76,9 @@ Default Scalar Model: Small
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x10a           0x18f  (399)
-.text                        0x30a                0x8a            0xcf  (207)
+.text                        0x30a                0x88            0xcc  (204)
 
-                 Total "program" memory used (bytes):          0x25e  (606) <1%
+                 Total "program" memory used (bytes):          0x25b  (603) <1%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x2000]
@@ -116,7 +116,7 @@ External Symbols in Program Memory (by address):
                   0x000252                  __data_init_da
                   0x000304                  __DefaultInterrupt
                   0x00030a                  _main
-                  0x000380                  _initI2C
+                  0x00037e                  _initI2C
 
 External Symbols in Program Memory (by name):
 
@@ -125,7 +125,7 @@ External Symbols in Program Memory (by name):
                   0x000252                  __data_init_da
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
-                  0x000380                  _initI2C
+                  0x00037e                  _initI2C
                   0x00030a                  _main
 
 Memory Configuration
@@ -180,7 +180,7 @@ reserve_data_0x82a
                     0x082a         0x26
                     0x0850                  . = 0x26
  *fill*             0x082a         0x2600
-LOAD build/default/debug/Main.o
+LOAD build/default/debug/newmainXC16.o
                     0x0001                  __MPLAB_BUILD = 0x1
                     0x0001                  __MPLAB_DEBUG = 0x1
                     0x0001                  __DEBUG = 0x1
@@ -245,26 +245,26 @@ __CONFIG1
 .comment
  *(.comment)
 
-.debug_info       0x000000        0xb74
+.debug_info       0x000000        0xaa5
  *(.debug_info)
- .debug_info      0x000000        0xb74 build/default/debug/Main.o
+ .debug_info      0x000000        0xaa5 build/default/debug/newmainXC16.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev     0x000000         0xed
  *(.debug_abbrev)
- .debug_abbrev    0x000000         0xed build/default/debug/Main.o
+ .debug_abbrev    0x000000         0xed build/default/debug/newmainXC16.o
 
-.debug_line       0x000000        0x125
+.debug_line       0x000000        0x12c
  *(.debug_line)
- .debug_line      0x000000        0x125 build/default/debug/Main.o
+ .debug_line      0x000000        0x12c build/default/debug/newmainXC16.o
 
 .debug_frame      0x000000         0x4c
  *(.debug_frame)
- .debug_frame     0x000000         0x4c build/default/debug/Main.o
+ .debug_frame     0x000000         0x4c build/default/debug/newmainXC16.o
 
 .debug_str        0x000000         0x3f
  *(.debug_str)
- .debug_str       0x000000         0x3f build/default/debug/Main.o
+ .debug_str       0x000000         0x3f build/default/debug/newmainXC16.o
 
 .debug_loc
  *(.debug_loc)
@@ -276,7 +276,7 @@ __CONFIG1
                   0x000000         0x27
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000         0x27 build/default/debug/Main.o
+                  0x000000         0x27 build/default/debug/newmainXC16.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -284,7 +284,7 @@ __CONFIG1
 .debug_aranges    0x000000         0x18
  *(.debug_aranges)
  .debug_aranges
-                  0x000000         0x18 build/default/debug/Main.o
+                  0x000000         0x18 build/default/debug/newmainXC16.o
                     0x0000                  WREG0 = 0x0
                     0x0000                  _WREG0 = 0x0
                     0x0002                  WREG1 = 0x2
@@ -874,18 +874,6 @@ __CONFIG1
                     0x02b6                  _U4RXREG = 0x2b6
                     0x02b8                  U4BRG = 0x2b8
                     0x02b8                  _U4BRG = 0x2b8
-                    0x02c0                  TRISA = 0x2c0
-                    0x02c0                  _TRISA = 0x2c0
-                    0x02c0                  _TRISAbits = 0x2c0
-                    0x02c2                  PORTA = 0x2c2
-                    0x02c2                  _PORTA = 0x2c2
-                    0x02c2                  _PORTAbits = 0x2c2
-                    0x02c4                  LATA = 0x2c4
-                    0x02c4                  _LATA = 0x2c4
-                    0x02c4                  _LATAbits = 0x2c4
-                    0x02c6                  ODCA = 0x2c6
-                    0x02c6                  _ODCA = 0x2c6
-                    0x02c6                  _ODCAbits = 0x2c6
                     0x02c8                  TRISB = 0x2c8
                     0x02c8                  _TRISB = 0x2c8
                     0x02c8                  _TRISBbits = 0x2c8
@@ -1375,10 +1363,8 @@ __CONFIG1
                     0x04de                  _ANCFGbits = 0x4de
                     0x04e0                  ANSA = 0x4e0
                     0x04e0                  _ANSA = 0x4e0
-                    0x04e0                  _ANSAbits = 0x4e0
                     0x04e0                  ANSELA = 0x4e0
                     0x04e0                  _ANSELA = 0x4e0
-                    0x04e0                  _ANSELAbits = 0x4e0
                     0x04e2                  ANSB = 0x4e2
                     0x04e2                  _ANSB = 0x4e2
                     0x04e2                  _ANSBbits = 0x4e2
@@ -1387,10 +1373,8 @@ __CONFIG1
                     0x04e2                  _ANSELBbits = 0x4e2
                     0x04e4                  ANSC = 0x4e4
                     0x04e4                  _ANSC = 0x4e4
-                    0x04e4                  _ANSCbits = 0x4e4
                     0x04e4                  ANSELC = 0x4e4
                     0x04e4                  _ANSELC = 0x4e4
-                    0x04e4                  _ANSELCbits = 0x4e4
                     0x04e6                  ANSD = 0x4e6
                     0x04e6                  _ANSD = 0x4e6
                     0x04e6                  _ANSDbits = 0x4e6
@@ -2021,12 +2005,12 @@ LOAD default_isr
 .debug_pubtypes
                   0x000018         0xdf
  .debug_pubtypes
-                  0x000018         0xdf build/default/debug/Main.o
+                  0x000018         0xdf build/default/debug/newmainXC16.o
 
 __c30_signature
                   0x0000f7         0x12
  __c30_signature
-                  0x0000f7          0x6 build/default/debug/Main.o
+                  0x0000f7          0x6 build/default/debug/newmainXC16.o
  __c30_signature
                   0x0000fd          0x6 c:/program files (x86)/microchip/xc16/v1.41/bin/bin/../../lib\liblega-pic30-elf.a(crt0_extended24.o)
  __c30_signature
@@ -2034,17 +2018,17 @@ __c30_signature
 
 .config_JTAGEN    0x0157fe          0x2
  .config_JTAGEN
-                  0x0157fe          0x2 build/default/debug/Main.o
+                  0x0157fe          0x2 build/default/debug/newmainXC16.o
 
 .config_IESO      0x0157fc          0x2
- .config_IESO     0x0157fc          0x2 build/default/debug/Main.o
+ .config_IESO     0x0157fc          0x2 build/default/debug/newmainXC16.o
 
 .config_IOL1WAY
                   0x0157f8          0x2
  .config_IOL1WAY
-                  0x0157f8          0x2 build/default/debug/Main.o
+                  0x0157f8          0x2 build/default/debug/newmainXC16.o
 
-.text             0x00030a         0x8a
- .text            0x00030a         0x8a build/default/debug/Main.o
+.text             0x00030a         0x88
+ .text            0x00030a         0x88 build/default/debug/newmainXC16.o
                   0x00030a                  _main
-                  0x000380                  _initI2C
+                  0x00037e                  _initI2C
